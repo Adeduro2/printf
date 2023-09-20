@@ -46,13 +46,9 @@ typedef struct selectPrintFn
     int (*f)(va_list, flags_tag *f);
 } spf;
 
-/**
- * struct flags - struct containing flags to "turn on"
- * when a flag specifier is passed to _printf()
- * @plus: flag for the '+' character
- * @space: flag for the ' ' character
- * @hash: flag for the '#' character
- */
+/* select_flag.c */
+int select_flag(char s, flags_tag *f);
+
 
 int _printf(const char *format, ...);
 int handle_print(const char *fmt, int *i, va_list list, char buffer[], int flags, int width, int precision, int size);
