@@ -49,6 +49,12 @@ typedef struct selectPrintFn
 /* select_flag.c */
 int select_flag(char s, flags_tag *f);
 
+/* select_print.c*/
+int (*select_print(char s))(va_list, flags_tag *);
+
+/*write_functions.c*/
+int _putchar(char c);
+int _puts(char *str);
 
 int _printf(const char *format, ...);
 int handle_print(const char *fmt, int *i, va_list list, char buffer[], int flags, int width, int precision, int size);
