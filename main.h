@@ -19,12 +19,32 @@
 #define S_LONG 2
 #define S_SHORT 1
 
-struct fmt
+/**
+ 30  * struct flags - struct containing flags to "turn on"
+ 31  * when a flag specifier is passed to _printf()
+ 32  * @plus: flag for the '+' character
+ 33  * @space: flag for the ' ' character
+ 34  * @hash: flag for the '#' character
+ 35  */
+ typedef struct flags
 {
-    char fmt;
-    int (*fn)(va_list, char[], int, int, int, int);
-};
-typedef struct fmt fmt_t;
+	int plus;
+	int space;
+	int hash;
+} flags_tag;
+
+/**
+ * struct selectPrintFn - struct to choose the right
+ * function depending on the format specifier
+ * passed to _printf()
+ * @c: format specifier
+ * @f: pointer to the correct printing function
+ */
+typedef struct selectPrintFn
+{
+    char c;
+    int (*f)(va_list, flags_tag *f);
+} spf;
 
 /**
  * struct flags - struct containing flags to "turn on"
@@ -33,12 +53,6 @@ typedef struct fmt fmt_t;
  * @space: flag for the ' ' character
  * @hash: flag for the '#' character
  */
-typedef struct flags
-{
-	int plus;
-	int space;
-	int hash;
-} flags_tag;
 
 int _printf(const char *format, ...);
 int handle_print(const char *fmt, int *i, va_list list, char buffer[], int flags, int width, int precision, int size);
